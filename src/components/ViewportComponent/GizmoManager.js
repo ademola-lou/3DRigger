@@ -1,5 +1,7 @@
+import { Rigger } from "../../Library/Rigger";
 import { states } from "../../Utils/states";
-
+const higlightColor = new BABYLON.Color3(0, 1, 1);
+let prevBoneSelected;
 export function gizmoManager(){
      // Create utility layer the gizmo will be rendered on
      const utilLayer = new BABYLON.UtilityLayerRenderer(scene);
@@ -27,9 +29,18 @@ export function gizmoManager(){
             
             rotationGizmo.attachedMesh = pickResult.pickedMesh;
             states.selected_bone = rotationGizmo.attachedMesh;
+            if(prevBoneSelected){
+                if(Rigger.meshHighlighter.hasMesh(prevBoneSelected)){
+                    Rigger.meshHighlighter.removeMesh(prevBoneSelected);
+                }
+            }
+
             if(pickResult.pickedMesh.name.includes("Root")){
                 positionGizmo.attachedMesh = pickResult.pickedMesh;
             }
+
+            Rigger.meshHighlighter.addMesh(pickResult.pickedMesh, higlightColor);
+            prevBoneSelected = pickResult.pickedMesh;
         }
     }, BABYLON.PointerEventTypes.POINTERDOWN);
 

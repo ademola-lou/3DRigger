@@ -14,7 +14,7 @@ export async function loadModel(url, ext){
     result.meshes.forEach(mesh=>{
         if(mesh.geometry){
            mesh.originalMaterial = mesh.material.clone();
-           mesh.scaling.scaleInPlace(2);
+        //    mesh.scaling.scaleInPlace(2);
            targetMesh = mesh;
         }
     })
@@ -22,5 +22,5 @@ export async function loadModel(url, ext){
     container.normalizeToUnitCube();
     
 
-    return targetMesh;
+    return result.meshes[1];
 }

@@ -1,38 +1,18 @@
 import React, { useState } from 'react';
 
 export function MenuBar(){
-    let[boneCount, setBoneCount] = useState(0);
-    let[isBoneDebugEnabled, enableBoneDebug] = useState(true);
-
-    function addBone(){
-        let boneName = "Bone"+boneCount;
-        if(boneCount === 0){
-            boneName = "rootBone";
-        }
-        document.dispatchEvent(new CustomEvent("addBone", {detail: {boneName: boneName}}));
-        setBoneCount(boneCount + 1);
-    }
-
-    function bindBones(){
-        document.dispatchEvent(new CustomEvent("updateWeight"))
-    }
-    
-    function toggleBoneDebug(){
-        enableBoneDebug(!isBoneDebugEnabled);
-
-        document.dispatchEvent(new CustomEvent("toggleBoneDebug"));
-    }
     return(
-        <div className="navbar rounded-b top-bar shadow-lg border-b border-black" style={{
+        <div className="navbar rounded-b top-bar shadow-lg border-b border-black flex flex-row gap-4 place-content-center" style={{
             width: "95%"
         }}>
-            <div className='flex-1 gap-5 top-bar-tools' style={{color: "white"}}>
-                <button className='btn btn-circle btn-ghost' onClick={addBone}>Bone</button>
-                <button className='btn btn-circle btn-ghost' onClick={bindBones}>Bind</button>
-                <button className='btn btn-circle btn-ghost'>Ik</button>
+            <div className='flex-1 gap-3 top-bar-tools' style={{color: "white"}}>
+                <button className='btn btn-circle btn-ghost'>File</button>
+                <button className='btn btn-circle btn-ghost'>Help</button>
                 <button className='btn btn-circle btn-ghost'><i className='icon video'></i></button>
-                <button className='btn btn-circle btn-ghost' onClick={toggleBoneDebug}>Debug</button>
-                <button className='btn btn-circle btn-ghost' onClick={toggleBoneDebug}>Import</button>
+                <button className='btn btn-circle btn-ghost'>Import</button>
+                </div>
+                <div style={{float: "right"}}>
+                    <img src="assets/images/launcherIcons/android-launchericon-192-192.png" className='w-16 rounded-full' />
                 </div>
         </div>
     )

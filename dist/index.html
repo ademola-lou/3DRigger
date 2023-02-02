@@ -33,6 +33,7 @@
         <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
         <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
         <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+        <script src="scripts/timeliner.js"></script>
         <!-- <script src="https://flyover.github.io/imgui-js/dist/imgui.umd.js"></script>
         <script src="https://flyover.github.io/imgui-js/dist/imgui_impl.umd.js"></script> -->
         <style>
@@ -48,6 +49,7 @@
        -moz-user-select: none; /* Old versions of Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
+            touch-action: none;
             }
 
             #renderCanvas {
@@ -59,6 +61,7 @@
                 outline: 0;
                 border:none;
                 color: rgba(0, 0, 0, 0);
+                touch-action: none;
             }
         </style>
     </head>
@@ -66,5 +69,6 @@
     
     <div id="main-page"></div>
     <script src="bundle.js"></script>
+
 </body>
 </html>
