@@ -17,15 +17,17 @@ export function AppEventListener(){
     paintmat.specularColor = BABYLON.Color3.Black();
     
     let prepareWeightPaintFunc = function(){
-        isCameraLocked = !isCameraLocked;
-        let camera = scene.activeCamera;
-        if(isCameraLocked){
-            camera.detachControl();
-            targetMesh.material = paintmat;
-            targetMesh.wireframeMesh.visibility = 1;
-        }else{
-            camera.attachControl(canvas, true);
-        }
+        // isCameraLocked = !isCameraLocked;
+        // let camera = scene.activeCamera;
+        // if(isCameraLocked){
+        //     camera.detachControl();
+        //     targetMesh.material = paintmat;
+        //     targetMesh.wireframeMesh.visibility = 1;
+        // }else{
+        //     camera.attachControl(canvas, true);
+        // }
+        targetMesh.material = paintmat;
+        targetMesh.wireframeMesh.visibility = 1;
     }
 
     
@@ -33,7 +35,6 @@ export function AppEventListener(){
     
 
     let targetBoneIndex = 0;
-    let materialIndex = 0;
     let BoneWeightShaderMat = BABYLON.SkeletonViewer.CreateBoneWeightShader(
         {
             skeleton,
@@ -43,16 +44,17 @@ export function AppEventListener(){
 
     let isBoneWeightmatActive = false;
     let toggleBoneDebugFunc = function(ev){
-        switch(materialIndex){
-            case 0: 
+        const debugMode = ev.detail.debugMode;
+        switch(debugMode){
+            case "T": 
                 targetMesh.material = defaultmat;
                 targetMesh.wireframeMesh.visibility = 0;
             break;
-            case 1:
+            case "B":
                 targetMesh.material = paintmat;
                 targetMesh.wireframeMesh.visibility = 1;
             break;
-            case 2:
+            case "W":
                 if(targetMesh.skeleton){
                     targetMesh.material = BoneWeightShaderMat;
                     targetMesh.wireframeMesh.visibility = 0;
@@ -62,9 +64,7 @@ export function AppEventListener(){
                 }
             break;
         }
-        isBoneWeightmatActive = materialIndex === 2 && targetMesh.skeleton;
-
-        materialIndex = ++materialIndex % 3;
+        isBoneWeightmatActive = debugMode === "W" && targetMesh.skeleton;
     }
     
     let checkActiveBoneWeight = function(){

@@ -1,4 +1,6 @@
 import React from 'react';
+import { FootBarMenu } from './FootBarComponent/footBarMenu';
+import { FootBarMenuUp } from './FootBarComponent/footBarMenuUp';
 import { MenuBar } from './MenuBarComponent/menuBar';
 import { SideBarRight } from './SideBarComponent/sideBar';
 // import { SideBarRight } from './SideBarComponent/SideBarRight';
@@ -9,6 +11,8 @@ export default function App() {
             <MenuBar></MenuBar>
             <ViewportRenderer></ViewportRenderer>
             <SideBarRight></SideBarRight>
+            <FootBarMenuUp></FootBarMenuUp>
+            <FootBarMenu></FootBarMenu>
         </div>
 
     )

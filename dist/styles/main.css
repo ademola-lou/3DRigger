@@ -4,7 +4,42 @@
     top: 0%;
     left: 50%;
     transform: translate(-50%, 0%);
-    width: 0px; 
+    /* width: 0px;  */
+    background-color: black;
+    z-index: 1;
+}
+
+.foot-bar {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: black;
+    z-index: 1;
+}
+svg {
+    fill: white;
+}
+#sideBarPanel{
+  position: absolute;
+  left: 3%;
+  top: 10%;
+  transform: translate(-3%, -10%);
+  --tp-container-background-color: black;
+  --tp-container-background-color-active: blue;
+  --tp-container-background-color-focus: blue;
+  --tp-container-background-color-hover: blue;
+  --tp-container-foreground-color: white;
+  width: 40%;
+  overscroll-behavior: contain;
+}
+.foot-bar-up {
+    position: absolute;
+    bottom: 15%;
+    left: -100%;
+    height: 30%;
+    transform: translate(-50%, 15%);
+    transition: left 400ms;
     background-color: black;
     z-index: 1;
 }
@@ -29,14 +64,19 @@ i{
 }
 .sideBarRight{
     position: absolute;
-    top: 10%;
-    left: 80%;
+    top: 30%;
+    left: 0%;
     /* background-color: black; */
 }
 .btn:focus{
     outline-color: blue;
     border-color: blue;
-    /* color: rgba(0, 0, 0, 0); */
+}
+
+#embed {
+  /* position: absolute;
+  top: 80% */
+  top: 300px;
 }
 .promptDialog {
     visibility: hidden;
@@ -127,3 +167,29 @@ ul, .myUL {
     outline: none;
     box-shadow: none;
   }
+
+  input[type=range][orient=vertical]
+{
+  margin-top: 100px;
+  width: 12em;
+  background-color: white;
+  margin-left: -60px;
+  transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+}
+/* input[type='range']::-webkit-slider-runnable-track {
+  color: #13bba4;
+  background-color: red;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  background: blue;
+} */
+
+input[type='range']::-webkit-slider-thumb {
+  background: white;
+}
+.brushRadiusContainer {
+  height: 15em;
+  margin-top: 10px;
+}

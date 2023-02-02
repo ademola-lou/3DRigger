@@ -1,5 +1,6 @@
 export const states = {
     weightPaintEnabled: false,
     selected_bone: null,
-    weightPaintEraserEnabled: false
+    weightPaintEraserEnabled: false,
+    brushRadius: 0.05
 }

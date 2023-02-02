@@ -10,6 +10,13 @@ export class Rigger {
             this.boneDrawPlane = BABYLON.MeshBuilder.CreatePlane("drCanv", {size: 2});
             this.boneDrawPlane.visibility = 0.1
             this.boneDrawPlane.setEnabled(false);
+            this.meshHighlighter = new BABYLON.HighlightLayer("hl", scene, {
+                isStroke: true,
+                blurHorizontalSize: 1,
+                blurVerticalSize: 1,
+                blurTextureSizeRatio: 3
+            });
+            
         }
         return this.skeleton;
     }
@@ -191,7 +198,6 @@ export class Rigger {
     mesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, colors, true) 
 
     let targetVec = BABYLON.Vector3.Zero();
-    let radius = 0.05;
     let pointerDown = false;
     scene.onPointerObservable.add(()=>{
         let picker = scene.pick(scene.pointerX, scene.pointerY, (predicmesh)=>{
@@ -203,17 +209,17 @@ export class Rigger {
     }, BABYLON.PointerEventTypes.POINTERDOWN);
 
     scene.onPointerObservable.add(()=>{
-        if(pointerDown && states.weightPaintEnabled){
+        if(pointerDown && (states.weightPaintEnabled || states.weightPaintEraserEnabled)){
         let picker = scene.pick(scene.pointerX, scene.pointerY, (predicmesh)=>{
             return predicmesh === mesh;
         })
 
         if(picker.hit){
-
+            camera.detachControl()
             for(let j = 0; j<vertices.length; j++){
                 BABYLON.Vector3.TransformCoordinatesToRef(vertices[j], picker.pickedMesh.getWorldMatrix(), targetVec);
                 const distance = BABYLON.Vector3.Distance(targetVec, picker.pickedPoint);
-                if(distance < radius){
+                if(distance < states.brushRadius){
                     if(!states.weightPaintEraserEnabled){
                     colors[j * 4] = 1;
                     selectedVertexIndices.add(j);
@@ -230,8 +236,8 @@ export class Rigger {
 
     scene.onPointerObservable.add(()=>{
         pointerDown = false;
+        camera.attachControl()
     }, BABYLON.PointerEventTypes.POINTERUP);
-    let selectBone = false;
 
     let firstBind = true;
 
